@@ -1,0 +1,13 @@
+[versions]
+shadow = "8.1.1"
+licenser = "0.6.1"
+lombok = "1.18.34"
+jetbrains-annotations = "24.0.0"
+
+[plugins]
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+licenser = { id = "org.cadixdev.licenser", version.ref = "licenser" }
+
+[libraries]
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }

@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    alias(libs.plugins.shadow)
+    alias(libs.plugins.licenser)
+}
+
+defaultTasks("updateLicenses", "build")
+
+group = 'net.kikatsuru.telegrapi'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly(libs.jetbrains.annotations)
+    compileOnly(libs.lombok)
+
+    annotationProcessor(libs.lombok)
+}
+
+build {
+    dependsOn(shadowJar)
+}
+
+shadowJar {
+    from(rootProject.file("LICENSE"))
+    archiveFileName = "telegrapi-${project.version}.jar"
+}
+
+license {
+    header = rootProject.file("HEADER")
+    def currentYear = new Date().format("yyyy")
+
+    properties {
+        name = "Kikatsuru"
+        year = "2024" == currentYear ? currentYear : "2024 - " + currentYear
+    }
+    include("**/*.java")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding =  "UTF-8"
+}
